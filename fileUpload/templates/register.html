@@ -1,0 +1,52 @@
+{% extends 'base.html' %}
+
+{% block title %}
+  Sign Up
+{% endblock %}
+
+{% block content %}
+<div class="mt-28">
+  <div class="sm:w-2/3 sm:mx-auto w-full ml-2 rounded-xl">
+    <h1 class="mb-4 text-3xl font-bold"> Sign Up</h1>
+    <p class="text-lg text-lightCyan">Already have an account??<a
+    class="text-blue-300" href="/login"> Login</a></p>
+    
+    <form id="registrationForm" action="" method="post" class="py-2 px-2">
+      {% csrf_token %}
+
+      <div class="flex flex-col mb-6">
+          <label class="text-lg text-lightCyan font-bold">Username</label>
+           <input type="text" name="username" id="username" class="auth-field"
+           placeholder="Eg. Jonny22" required>
+      </div>
+      <div class="flex flex-col mb-6">
+          <label class="text-lg text-lightCyan font-bold">Email</label>
+          <input type="email" name="email" id="email" class="auth-field"
+          placeholder="youremail@example.com" required>
+      </div>
+      <div class="flex flex-col mb-6">
+          <label class="text-lg text-lightCyan font-bold">Password</label>
+          <input type="password" name="password" id="password"
+          class="auth-field" placeholder="Enter a password" required>
+      </div>
+      <div class="flex flex-col mb-6">
+          <label class="text-lg text-lightCyan font-bold">Confirm Password</label>
+          <input type="password" name="password2" id="password2"
+          class="auth-field" placeholder="Re-enter password" required>
+      </div>
+      
+         <div class="mb-4 text-xl text-red-400" id="errors">
+           
+          </div>        
+      <button class="w-full py-4 px-8 bg-neonGreen rounded-lg text-darkGreyBlue
+      text-2xl font-bold" type="submit"><span id="btn-msg"> Sign Up</span></button>
+    </form>
+  </div>
+</div>
+
+{% endblock %}
+
+{% load static %}
+{% block js %}
+  <script src="{% static 'js/register.js' %}"></script>
+{% endblock %}

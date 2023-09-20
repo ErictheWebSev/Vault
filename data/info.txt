@@ -1,0 +1,11 @@
+           <div class="rounded-xl border border-lightCyan w-24 h-44 flex
+           justify-center items-center py-2">
+            <i class="text-7xl text-lightCyan tex5-center fas fa-file-pdf"></i>
+           </div>
+           
+          This;file;above is for;the;file pdf change which will beused;for other
+          docs as welll
+          
+          
+          
+          This oone below is flr;the;fkles

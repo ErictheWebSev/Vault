@@ -1,0 +1,47 @@
+{% extends 'base.html' %}
+
+{% block title %}
+  Categories
+{% endblock %}
+
+{% block content %}
+<div class="mt-28">
+  <div class="sm:w-2/3 sm:mx-auto w-96 ml-2 rounded-xl">
+  <div class="text-xl text-green-500" id="msg">
+  </div>
+  <h1 class="text-4xl text-blue-200 mb-5">Categories</h1>
+  
+  <form id="categoryForm" method="post">
+   {% csrf_token %}
+   
+    <label class="text-lg text-lightCyan font-bold mb-2 sm:text-center">New Category</label>
+    <div class="flex mb-6 space-x-4 overflow-hidden overflow-x-hidden h-20
+    sm:mx-auto">
+        <input type="text" name="category_name" id="category_name"
+        class="auth-field w-72" placeholder="Eg. Documents" required>
+        <button type="submit" class="w-20 translate-y-3 h-10 text-darkGreyBlue bg-neonGreen
+        rounded-xl text-center text-lg px-4">Add</button>
+
+      </div>
+  </form>
+  
+   <div class="category-list" id="category-list">
+   {% for category in categories %}
+    <a href="#">
+    <div class="category-box">
+        <span class="span">{{ category.file_count }} Files</span>
+        <h3 class="h2">{{ category.name }}</h3>
+    </div>
+   </a>
+  {% endfor %}
+  </div>
+</div>
+</div>
+
+{% endblock %}
+
+
+{% load static %}
+{% block js %}
+  <script src="{% static 'js/category.js' %}"></script>
+{% endblock %}

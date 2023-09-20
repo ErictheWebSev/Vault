@@ -1,0 +1,76 @@
+{% extends 'base.html' %}
+
+{% block title %}
+  Manage Files
+{% endblock %}
+
+{% block content %}
+<div class="mt-28">
+  <div class="sm:w-2/3 sm:mx-auto w-96 ml-2 rounded-xl">
+  <div class="text-xl text-green-500" id="msg">
+  </div>
+  <h1 class="text-4xl text-blue-200 mb-5">Hey {{ user }}!</h1>
+  <h3 class="text-lg text-lightCyan font-bold mb-2 sm:text-center">Manage Your
+  Files</h3>
+
+   <div class="flex w-full flex-col space-y-10">
+   {% for file in files %}
+     <a href="{% url 'file-detail' file.id %}">
+       <div class="file-box flex-row space-x-5 pb-10 relative">
+         <div class="image">
+        {% if 'image/' in file.file_type %}
+          <img class="w-40 h-44 rounded-xl object-contain border
+           border-lightCyan" src="{{ file.file.url }}" alt="" />
+        {% elif file.file_type == 'application/pdf' %}
+          <div class="rounded-xl border border-lightCyan w-24 h-44 flex
+           justify-center items-center py-2">
+          <i class="text-6xl text-lightCyan text-center fas fa-file-pdf"></i>
+           </div>
+       {% elif file.file_type == 'application/zip' %}
+         <div class="rounded-xl border border-lightCyan w-24 h-44 flex
+           justify-center items-center py-2">
+          <i class="text-6xl text-lightCyan text-center fas fa-file-zipper"></i>
+           </div>
+        {% elif 'video/' in file.file_type %}        <div class="rounded-xl border border-lightCyan w-24 h-44 flex
+           justify-center items-center py-2">
+          <i class="text-6xl text-lightCyan text-center fas fa-file-video"></i>
+           </div>
+
+        {% elif 'text/' in file.file_type %}   
+          <div class="rounded-xl border border-lightCyan w-24 h-44 flex
+           justify-center items-center py-2">
+          <i class="text-6xl text-lightCyan text-center fas fa-file-text"></i>
+           </div>
+        {% else %}         
+          <div class="rounded-xl border border-lightCyan w-24 h-44 flex
+           justify-center items-center py-2">
+          <i class="text-7xl text-lightCyan text-center fas fa-file"></i>
+           </div>
+        {% endif %}
+         </div>
+         
+         <div class="text space-y-3 mb-3">
+           <h2 class="text-lg">File name: {{ file.file_name }}</h2>
+           <p class="text-sm">File size: {{ file.file_size }}</p>
+           <p class="text-sm">File type: {{ file.file_type }}</p>
+         </div>
+       </div>
+       <div class="space-y-5 mx-auto text-center  flex flex-col
+       absolute right-10 top-30 -translate-y-5">
+         <button class="text-xl text-lightCyan"><i class="fas fa-trash"></i></button>
+         <button class="text-xl text-lightCyan"><i class="fas fa-download"></i></button>
+       <button class="text-xl text-lightCyan"><i class="fas fa-share"></i></button>
+       </div>
+     </a>
+    {% endfor %}
+  </div>
+</div>
+</div>
+
+{% endblock %}
+
+
+{% load static %}
+{% block js %}
+  <script src="{% static 'js/files.js' %}"></script>
+{% endblock %}

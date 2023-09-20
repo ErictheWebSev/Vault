@@ -1,0 +1,97 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}{% endblock %} | Vault </title>
+    <link rel="stylesheet" href="../static/css/style.css" />
+    <link rel="stylesheet" href="{% static 'css/style.css' %}" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+  </head>
+  <body class="bg-darkBlue">
+      <nav class="nav">
+      <div class="logo text-neonGreen text-5xl py-3 pl-6">
+          <span class="logo-name">Vault</span>
+          </div>
+        
+        <div class="logo text-3xl pl-5 text-blue-200 space-x-5 flex">
+        {% if user.is_authenticated %}
+          <i id="icon-up" class="fas fa-cloud-upload-alt"></i>
+          <i class="fas fa-bars"
+          id="menu-icon"></i>
+          
+          <i class="hidden fas fa-close" id="close-icon"></i>
+        {% else %}
+         <a href="{% url 'register' %}"> Sign Up</a>
+         <a href="{% url 'login' %}"> Sign In</a>
+        {% endif %}
+        </div>  
+        
+        {% if user.is_authenticated %}
+        <div class="sidebar open sm:left-0">
+          <div class="logo text-neonGreen text-5xl py-3 pl-6 mb-6">
+            <span class="logo-name">Vault</span>
+          </div>
+  
+          <div class="sidebar-content pl-6 pt-12">
+            <ul class="lists space-y-9">
+              <li class="list">
+                <a href="{% url 'dashboard' %}" class="nav-link">
+                  <i class="fas fa-home icon"></i>
+                  <span class="link">Dashboard</span>
+                </a>
+              </li>
+              <li class="list">
+                <a href="{% url 'upload' %}" class="nav-link">
+                  <i class="fas fa-cloud-upload-alt icon"></i>
+                  <span class="link">Upload File</span>
+                </a>
+              </li>
+              <li class="list">
+                <a href="{% url 'category' %}" class="nav-link">
+                  <i class="fas fa-tasks icon"></i>
+                  <span class="link">My Categories</span>
+                </a>
+              </li>
+
+              <li class="list">
+                <a href="{% url 'manage_files' %}" class="nav-link">
+                  <i class="fas fa-folder icon"></i>
+                  <span class="link">My Files</span>
+                </a>
+              </li>
+  
+            <div class="pt-16 space-y-7">
+              <li class="list">
+                <a href="#" class="nav-link">
+                  <i class="fas fa-cog icon"></i>
+                  <span class="link">Settings</span>
+                </a>
+              </li>
+              <li class="list">
+                <a href="{% url 'logout' %}" class="nav-link">
+                  <i class="fas fa-sign-out icon"></i>
+                  <span class="link">Logout</span>
+                </a>
+              </li>
+            </ul>
+            </div>
+          </div>
+        </div>
+        {% else %}
+        {% endif %}
+    </nav>
+    <div class="w-full h-screen p-3 bg-darkBlue text-white overflow-x-hidden
+    sm:ml-[245px]">
+      {% block content %}
+      {% endblock %}
+    </div>
+    
+{% load static %}
+{% block js %}
+{% endblock %}
+  <script src="{% static 'js/main.js' %}"></script>
+  </body>
+</html>
+

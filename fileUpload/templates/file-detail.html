@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+
+{% block title %}
+  Categories
+{% endblock %}
+
+{% block content %}
+<div class="mt-28">
+  <div class="sm:w-2/3 sm:mx-auto w-96 ml-2 rounded-xl">
+    <div class="w-full h-full flex flex-col sm:flex-row sm:space-x-8">
+       <div class="w-[100%] sm:w-[30%] h-[35%] sm:h-full">
+          <img class="w-full h-[50%]rounded-xl border border-lightCyan" src="{{ file.file.url }}" alt="" />
+       </div>
+       <div class="w-[100%] sm:w-[70%] sm:h-full px-5 py-8 h-[75%] space-y-4">
+         <h2 class="text-xl text-lightCyan">File name: {{ file.file_name }}</h2>
+         <p class="text-lg">File size: {{ file.file_size }}</p>
+         <p class="text-lg">File type: {{ file.file_type }}</p>
+         <p class="text-lg">File Category: {{ file.category }}</p>
+         <p class="text-sm">Date uploaded: {{ file.date_uploaded }}</p>
+       </div>
+    </div>
+     
+     </div>
+    </div>
+</div>
+{% endblock %}
