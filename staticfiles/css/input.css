@@ -26,9 +26,13 @@
   background-repeat: no-repeat; 
   } 
   
+  .height {
+    height: 60px;
+    width: 80px;
+  }
   
   .h2 {
-    @apply text-left text-lightCyan text-xl;
+    @apply text-left text-lightCyan text-lg;
   }
   
   .category-list {
@@ -37,11 +41,11 @@
     width: 100%;
   }
   .span {
-    @apply text-lg text-neonGreen;
+    @apply text-sm text-neonGreen;
   }
   
   .file-box {
-    @apply flex sm:w-full w-96 px-2 py-4;
+    @apply flex justify-around sm:w-full w-96 px-3 py-6 flex-col h-auto;
     background-image: linear-gradient(to right, transparent , #4D70EF);
     background-size: 700px 350px;
     background-repeat: no-repeat; 
