@@ -2,6 +2,7 @@ from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
 from django.contrib.auth import login, authenticate,logout
+from django.views.decorators.http import require_POST
 from django.http import JsonResponse
 from .models import FileUpload, Category
 from django.db import models
@@ -15,9 +16,6 @@ def index(request):
 @login_required(login_url='login')
 def dashboard(request):
   return render(request, 'dashboard.html')
-
-
-
 
 
 @login_required(login_url='login')
@@ -78,7 +76,32 @@ def create_category(request):
 
 @login_required(login_url='login')
 def category_detail(request, category_id):
-  pass
+  category = get_object_or_404(Category, user=request.user, id=category_id)
+  
+  if request.method == 'POST':
+    try:
+      uploaded_file = request.FILES['file']
+      user = request.user
+      file_name = uploaded_file.name
+      file_size = uploaded_file.size
+      file_type = uploaded_file.content_type
+      
+      file = FileUpload(user=user, file=uploaded_file, file_name=file_name, file_size=file_size, file_type=file_type, category=category)
+      file.save()
+      response = {
+        'success': True,
+        'message': f'File uploaded successfully to ${category.name}'
+      }
+      return JsonResponse(response)
+    except KeyError:
+      return JsonResponse({'success': False, 'message': 'No file provided.'})
+   
+  files = FileUpload.objects.filter(user=request.user, category=category)
+  context = {
+    'category': category,
+    'files': files
+  }
+  return render(request, 'category-detail.html', context)
 
 
 @login_required(login_url='login')
@@ -106,6 +129,17 @@ def file_detail(request, file_id):
 	
 	return render(request, 'file-detail.html', context)
 	
+
+
+@login_required(login_url='login')
+def delete_file(request, file_id):
+    try:
+        file_to_delete = get_object_or_404(FileUpload, id=file_id, user=request.user)
+        file_to_delete.file.delete()
+        file_to_delete.delete()
+        return JsonResponse({'success': True, 'message': 'File deleted successfully.'})
+    except Exception as e:
+        return JsonResponse({'success': False, 'message': str(e)})
 
 
 #######  Authentication ######

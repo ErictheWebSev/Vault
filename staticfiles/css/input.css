@@ -13,13 +13,13 @@
 
 @layer components {
   .auth-field {
-    @apply w-full h-12 mt-2 py-2 px-5 rounded-lg text-sm sm:text-2xl text-white
+    @apply w-full h-12 mt-2 py-2 px-5 rounded-lg text-lg sm:text-2xl text-white
     border border-solid border-darkGreyBlue focus:border-neonGreen
     bg-darkGreyBlue autofill:bg-darkGreyBlue;
   }
   
     .category-box {
-    @apply w-36 h-36 py-10 pl-5 m-2 bg-darkGreyBlue rounded-xl block shadow
+    @apply w-44 h-36 py-10 pl-5 m-2 bg-darkGreyBlue rounded-lg block shadow
     overflow-x-hidden overflow-hidden space-y-4;
      background-image: linear-gradient(to right, transparent , #4D70EF);
   background-size: 330px 150px;
@@ -36,34 +36,40 @@
   }
   
   .category-list {
+    @apply w-screen mr-0;
     display: flex;
     flex-wrap: wrap;
-    width: 100%;
+    width: 110%;
   }
   .span {
     @apply text-sm text-neonGreen;
   }
   
   .file-box {
-    @apply flex justify-around sm:w-full w-96 px-3 py-6 flex-col h-auto;
+    @apply flex justify-around sm:w-full w-[100%] px-3 py-6 flex-col h-auto;
     background-image: linear-gradient(to right, transparent , #4D70EF);
     background-size: 700px 350px;
     background-repeat: no-repeat; 
   }
   
   .upload-box {
-    @apply flex flex-col sm:w-full h-96 px-8 py-16  bg-darkGreyBlue rounded-xl
-        w-80 mb-6;
+    @apply flex flex-col sm:w-full w-96 h-96 px-8 py-16  bg-darkGreyBlue rounded-lg mb-6;
     background-image: linear-gradient(to right, transparent , #4D70EF);
     background-size: 700px 350px;
     background-repeat: no-repeat; 
   }
   
   .preview-box {
-    @apply sm:w-full h-full px-5 py-12  bg-darkGreyBlue rounded-xl w-full flex
-    justify-between;
+    @apply sm:w-full h-full px-3 py-12  bg-darkGreyBlue rounded-xl w-full flex;
     background-image: linear-gradient(to right, transparent , #4D70EF);
     background-size: 700px 350px;
+    background-repeat: no-repeat; 
+  }
+  
+  .background {
+    @apply bg-darkGreyBlue
+    background-image: linear-gradient(to right, transparent , #4D70EF);
+    background-size: 500px 200px;
     background-repeat: no-repeat; 
   }
   
@@ -74,8 +80,7 @@
   
   .nav {
     @apply fixed top-0 left-0 h-[70px] w-full flex justify-between items-center
-    bg-darkBlue px-4 py-2 mb-8;
-    z-index: 1;
+    bg-darkBlue px-4 py-2 mb-8 z-10
   }
   
   .logo-name {

@@ -1,20 +1,60 @@
 {% extends 'base.html' %}
 
 {% block title %}
-  Manage Files
+  Categories - {{ category.name }}
 {% endblock %}
 
 {% block content %}
-<div class="mt-36">
-  <div class="sm:w-2/3 sm:mx-auto w-96 ml-2 rounded-xl px-2">
-  <div class="text-xl text-green-500" id="msg">
+<div class="mt-28">
+  <div class="sm:w-2/3 sm:mx-auto w-full ml-2 rounded-xl">
+  <div class="text-xl text-green-500 z-10" id="msg">
   </div>
-  <h1 class="text-4xl text-blue-200 mb-7">Hey {{ user }}!</h1>
-  <h3 class="text-lg text-lightCyan font-bold mb-4 sm:text-center">Manage Your
-  Files</h3>
+  
+   <h1 class="text-4xl text-blue-200 mb-8 sm:text-center">{{ category.name }}
+   Files </h1>
+   
+  <div class="upload-section relative sm:mb-4 py-8
+  sm:py-0 bg-darkBlue w-full px-3">
+   <h1 class="text-2xl text-blue-200 mb-5 text-center">Upload a file this category</h1>
+    
+      <form id="uploadForm" method="post" enctype="multipart/form-data" data-file-id="{{ category.id }}">
+        {% csrf_token %}
+        <div class="upload-box">
+          <div class="file-input text-center mx-auto mb-4">
+            <input type="file" name="file" id="file" hidden/>
+            <i class="fas fa-cloud-upload-alt cloud"></i>
+            <p class="text-xl"> Tap cloud icon to upload file</p>
+          </div>
+          
 
+          <button type="submit" class="w-40 h-20 px-6 py-4 rounded-lg
+          bg-darkPurple text-lightCyan mx-auto font-bold hover:opacity-70
+          text-center text-2xl" id="uploadBtn">Upload</button>
+        </div>
+      </form>
+      
+     <div class="preview preview-box space-x-7 relative overflow-x-scroll hidden">
+       <div class="">
+         <img class="w-24 h-24 rounded-lg hidden" src=""
+         alt="File image" id="prevImg" />
+         <h2 class="text-7xl text-blue-200 Ficon hidden"><i class="fas fa-file-alt"></i></h2>
+       </div>
+       <div class="flex flex-col space-y-5">
+         <h2 class="text-lg text-lightCyan" id="file-name"></h2>
+         <p class="text-sm" id="file-size">3.4mb</p>
+       </div>
+       <div class="">
+         <h2 id="file-type" class="text-lg text-lightCyan">Image/Jpeg</h2>
+       </div>
+     </div>
+  </div>
+ 
+  
+  
    <div class="flex w-full flex-col space-y-10">
    {% for file in files %}
+     <h1 class="text-2xl text-blue-200 mb-5">List of files in this
+     category</h1>
        <div class="file-box flex-row space-x-5 pb-10 relative rounded-lg">
         <a href="{% url 'file-detail' file.id %}">
          <div class="image">
@@ -69,7 +109,8 @@
        <button class="text-2xl text-lightCyan"><i class="fas fa-share"></i></button>
        </div>
       </div>
-
+    {% empty %}
+    <h3 class="text-lg text-neonGreen"> No files in this category yet...</h3>
     {% endfor %}
   </div>
 </div>
@@ -80,5 +121,6 @@
 
 {% load static %}
 {% block js %}
+  <script src="{% static 'js/category-detail.js' %}"></script>
   <script src="{% static 'js/files.js' %}"></script>
 {% endblock %}

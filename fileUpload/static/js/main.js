@@ -2,7 +2,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const menuIcon = document.getElementById('menu-icon')
   const closeCon = document.getElementById('close-con')
   const closeIcon = document.getElementById('close-icon')
-  const sideBar = document.querySelector('.sidebar');
+  const sideBar = document.querySelector('.sidebar')
   
   const uploadIcon = document.getElementById('icon-up');
   uploadIcon.addEventListener('click', () => {
